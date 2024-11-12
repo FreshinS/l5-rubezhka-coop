@@ -7,7 +7,7 @@ class IpAddressValidator {
   isValuesValid(str) {
     if (!this.valuesCheck) return true;
     const ip = str.split('.');
-    if (ip.length !== 4) return false ;
+    if (ip.length !== 4) return false;
     const filteredIp = ip.filter((digit) => digit >= 0 && digit <= 255);
     return filteredIp.length === 4;
   }
