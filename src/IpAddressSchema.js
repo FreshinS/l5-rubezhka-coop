@@ -1,14 +1,15 @@
 class IpAddressValidator {
-  ipAddressValues(min, max = Infinity) {
-    this.minLength = min;
-    this.maxLength = max;
+  ipAddressValues() {
+    this.valuesCheck = true;
     return this;
   }
 
-  isLengthValid(str) {
-    if (!this.minLength) return true;
-    const ip = str.slice(3);
-    return ip.length >= this.minLength && ip.length <= this.maxLength;
+  isValuesValid(str) {
+    if (!this.valuesCheck) return true;
+    const ip = str.split('.');
+    if (ip.length !== 4) return false ;
+    const filteredIp = ip.filter((digit) => digit >= 0 && digit <= 255);
+    return filteredIp.length === 4;
   }
 
   isIp(str) {
@@ -17,7 +18,7 @@ class IpAddressValidator {
   }
 
   isValid(str) {
-    return this.isIp(str) && this.isLengthValid(str);
+    return this.isIp(str) && this.isValuesValid(str);
   }
 }
 
